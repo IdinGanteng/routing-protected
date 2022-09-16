@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+
 import './App.css';
+import { Dashboard } from './Pages/Dashboard';
+import { Login } from './Auth/Login';
+import { Registration } from './Auth/Registration';
+import { PublicRoute } from './Routes/PublicRoute';
+import { ProtectedRoute } from './Routes/ProtectedRoute';
+import { AuthLayout } from './Auth/AuthLayout';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<PublicRoute />} >
+          <Route path='/' element={<AuthLayout />} >
+            <Route index path='/login' element={<Login />} />
+            <Route path='/registration' element={<Registration />} />
+            <Route path='/' element={<Navigate to={'/login'} replace />} />
+          </Route>
+        </Route>
+        <Route path='/' element={<ProtectedRoute />} >
+          <Route index path='/dashboard' element={<Dashboard />} />
+          <Route path='/' element={<Navigate to={'/dashboard'} replace />} />
+        </Route>
+        <Route path='*' element={<Navigate to={'/'} replace />} />
+      </Routes>
+    </Router>
     </div>
   );
 }

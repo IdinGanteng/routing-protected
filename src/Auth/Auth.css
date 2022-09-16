@@ -1,0 +1,25 @@
+.login {
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    padding: 120px 40px;
+    margin-top: 100px;
+    max-width: 500px;
+    height: 500px;
+    background-image: url("../component/keyboard.jpeg");
+    border-radius: 20px;
+}
+
+.registration {
+    background-image: url("../component/keyboard.jpeg");
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    padding-left: 120px;
+    margin-top: 100px;
+    max-width: 500px;
+    border-radius: 20px;
+}
+
