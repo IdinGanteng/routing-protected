@@ -7,6 +7,7 @@ import { Registration } from './Auth/Registration';
 import { PublicRoute } from './Routes/PublicRoute';
 import { ProtectedRoute } from './Routes/ProtectedRoute';
 import { AuthLayout } from './Auth/AuthLayout';
+import Home from './Pages/Home';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/' element={<Navigate to={'/dashboard'} replace />} />
         </Route>
         <Route path='*' element={<Navigate to={'/'} replace />} />
+        <Route path='/home' element={<Home/>}/>
       </Routes>
     </Router>
     </div>

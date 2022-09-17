@@ -1,8 +1,8 @@
-  import TextArea from 'antd/lib/input/TextArea'
+
 import React from 'react'
   import Navbar from '../component/Navbar'
   import Sidebar from '../component/Sidebar'
-  
+
   
   export const Dashboard = () => {
     const rawUser = localStorage.getItem('username')
@@ -12,8 +12,7 @@ import React from 'react'
         <Navbar/>
         <h1 style={{fontSize: 27, marginTop:'50px',marginBottom:'1px', paddingLeft:'40%'}}>Selamat Datang Tuan {user}</h1>
         <Sidebar/>
-        <div>
-        </div>
+       
       </div>
     )
   }

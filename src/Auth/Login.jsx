@@ -12,8 +12,8 @@ export const Login = () => {
   
   const onFinish = () => {
 
-    localStorage.getItem("username", JSON.stringify(username))
-    localStorage.getItem("password", JSON.stringify(password))
+    localStorage.setItem("username", JSON.stringify(username))
+    localStorage.setItem("password", JSON.stringify(password))
 
     navigate('/dashboard')
   };
