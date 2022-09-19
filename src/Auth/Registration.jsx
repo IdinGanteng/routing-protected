@@ -1,4 +1,5 @@
 import { Button, Checkbox, Form, Input, Select } from "antd";
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -41,19 +42,23 @@ export const Registration = () => {
 
   const navigate = useNavigate()
 
-  const [username, setusername] = useState('');
+  const [userName, setusername] = useState('');
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
-  const [phone, setphone] = useState('');
-  const [gender, setgender] = useState('');
   
-  const onFinish = () => {
+  const onFinish = async event => {
     
-    localStorage.setItem("username", JSON.stringify(username))
-    localStorage.setItem("email", JSON.stringify(email))
-    localStorage.setItem("password", JSON.stringify(password))
-    localStorage.setItem("phone", JSON.stringify(phone))
-    localStorage.setItem("gender", JSON.stringify(gender))
+    await axios.post("https://nodejs-backend-api-playground.herokuapp.com/auth/user/registration",{
+      userName,email,password
+    })
+    // console.log(
+    //   userName,
+    //   email,
+    //   password
+    // )
+    // localStorage.setItem("username", JSON.stringify(username))
+    // localStorage.setItem("email", JSON.stringify(email))
+    // localStorage.setItem("password", JSON.stringify(password))
 
     navigate("/login") 
   };
@@ -113,72 +118,6 @@ export const Registration = () => {
           hasFeedback
         >
           <Input.Password placeholder="please enter your password"/>
-        </Form.Item>
-
-        <Form.Item
-          name="confirm"
-         
-          dependencies={["password"]}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: "Please confirm your password!",
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-
-                return Promise.reject(
-                  new Error("The two passwords that you entered do not match!")
-                );
-              },
-            }),
-          ]}
-        >
-          <Input.Password placeholder="repeat and confirm your password"/>
-        </Form.Item>
-
-       
-
-        <Form.Item
-          name="phone"
-          
-          onChange={(e) => setphone(e.target.value)}
-          rules={[
-            {
-              required: true,
-              message: "Please input your phone number!",
-            },
-          ]}
-        >
-          <Input
-            placeholder="please enter your phone number"
-            style={{
-              width: "100%",
-            }}
-          />
-        </Form.Item>
-
-        <Form.Item
-          name="gender"
-          
-          rules={[
-            {
-              required: true,
-              message: "Please select gender!",
-            },
-          ]}
-          >
-          <Select 
-             onChange={(value) => setgender(value)}
-             placeholder="select your gender">
-            <Option value="male">CWK</Option>
-            <Option value="female">CWK</Option>
-            <Option value="other">Gak punya kelamin</Option>
-          </Select>
         </Form.Item>
 
         
