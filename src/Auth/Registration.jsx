@@ -39,7 +39,7 @@ export const Registration = () => {
   const [form] = Form.useForm();
 
   const navigate = useNavigate();
-  const [userCredentials,setUserCredentials]=useState({usreName:"",email:"",password:""});
+  const [userCredentials,setUserCredentials]=useState({userName:"",email:"",password:""});
   // console.log(userCredentials);
 
   
