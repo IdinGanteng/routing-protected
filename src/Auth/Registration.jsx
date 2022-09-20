@@ -1,9 +1,7 @@
-import { Button, Checkbox, Form, Input, Select } from "antd";
-import axios from "axios";
+import { Button, Checkbox, Form, Input } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const { Option } = Select;
+import {userRegistration} from "../service";
 
 const formItemLayout = {
   labelCol: {
@@ -40,26 +38,13 @@ const tailFormItemLayout = {
 export const Registration = () => {
   const [form] = Form.useForm();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [userCredentials,setUserCredentials]=useState({usreName:"",email:"",password:""});
+  // console.log(userCredentials);
 
-  const [userName, setusername] = useState('');
-  const [email, setemail] = useState('');
-  const [password, setpassword] = useState('');
   
   const onFinish = async event => {
     
-    await axios.post("https://nodejs-backend-api-playground.herokuapp.com/auth/user/registration",{
-      userName,email,password
-    })
-    // console.log(
-    //   userName,
-    //   email,
-    //   password
-    // )
-    // localStorage.setItem("username", JSON.stringify(username))
-    // localStorage.setItem("email", JSON.stringify(email))
-    // localStorage.setItem("password", JSON.stringify(password))
-
     navigate("/login") 
   };
 
@@ -75,7 +60,7 @@ export const Registration = () => {
          <Form.Item
           name="username"
           // placeholder="Username"
-          onChange={(e) => setusername(e.target.value)}
+          onChange={(e) => setUserCredentials({...userCredentials,userName:e.target.value})}
           tooltip="What do you want others to call you?"
           rules={[
             {
@@ -90,7 +75,7 @@ export const Registration = () => {
         <Form.Item
           name="email"
           
-          onChange={(e) => setemail(e.target.value)}
+          onChange={(e) => setUserCredentials({...userCredentials,email:e.target.value})}
           rules={[
             {
               type: "email",
@@ -108,7 +93,7 @@ export const Registration = () => {
         <Form.Item
           name="password"
           
-          onChange={(e) => setpassword(e.target.value)}
+          onChange={(e) => setUserCredentials({...userCredentials,password:e.target.value})}
           rules={[
             {
               required: true,
@@ -139,7 +124,7 @@ export const Registration = () => {
               </Checkbox>
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" onClick={()=>{userRegistration(userCredentials,navigate)}}>
                 Register
               </Button>
             </Form.Item>
