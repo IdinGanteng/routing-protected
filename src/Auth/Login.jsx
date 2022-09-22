@@ -3,20 +3,17 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router';
 import './Auth.css'
+import { userLogin } from '../service/authService';
 
 export const Login = () => {
   const navigate = useNavigate()
   
-  const [username, setusername] = useState('');
-  const [password, setpassword] = useState('');
+  // const [username, setusername] = useState('');
+  // const [password, setpassword] = useState('');
+  const [userCredentials,setUserCredentials]=useState({user:"",password:""});
+
   
-  const onFinish = () => {
-
-    localStorage.getItem("username", JSON.stringify(username))
-    localStorage.getItem("password", JSON.stringify(password))
-
-    navigate('/dashboard')
-  };
+  const onFinish = () => userLogin(userCredentials,navigate)
 
   return (
     <div className='login'>
@@ -30,7 +27,7 @@ export const Login = () => {
       >
         <Form.Item
           name="username"
-          onChange={(e) => setusername(e.target.value)}
+          onChange={(e) => setUserCredentials({...userCredentials,user:e.target.value})}
           rules={[
             {
               required: true,
@@ -42,7 +39,7 @@ export const Login = () => {
         </Form.Item>
         <Form.Item
           name="password"
-          onChange={(e) => setpassword(e.target.value)}
+          onChange={(e) => setUserCredentials({...userCredentials,password:e.target.value})}
           rules={[
             {
               required: true,
