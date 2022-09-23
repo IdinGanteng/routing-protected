@@ -11,10 +11,21 @@ export const Login = () => {
   // const [username, setusername] = useState('');
   // const [password, setpassword] = useState('');
   const [userCredentials,setUserCredentials]=useState({user:"",password:""});
-
-
-
-  
+  const [loadings,setLoadings]=useState([])
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        return newLoadings;
+      });
+    }, 6000);
+  };
   const onFinish = () => userLogin(userCredentials,navigate)
 
   return (
@@ -66,7 +77,10 @@ export const Login = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" className="login-form-button"
+          onClick={()=>enterLoading(0)}
+          loading={loadings[0]}
+           disabled={userCredentials.user && userCredentials.password ? false:true}>
             Log in
           </Button>
           Or <a href="/registration">register now!</a>

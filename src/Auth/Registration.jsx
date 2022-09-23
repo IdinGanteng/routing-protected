@@ -40,13 +40,25 @@ export const Registration = () => {
 
   const navigate = useNavigate();
   const [userCredentials,setUserCredentials]=useState({userName:"",email:"",password:""});
+  const [loadings,setLoadings]=useState([]);
   // console.log(userCredentials);
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        return newLoadings;
+      });
+    }, 6000);
+  };
 
   
-  const onFinish = async event => {
-    
-    navigate("/login") 
-  };
+  const onFinish = () => userRegistration(userCredentials,navigate);
 
   return (
     <div className="registration">
@@ -124,7 +136,10 @@ export const Registration = () => {
               </Checkbox>
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
-              <Button type="primary" htmlType="submit" onClick={()=>{userRegistration(userCredentials,navigate)}}>
+              <Button type="primary" htmlType="submit"
+               disabled={userCredentials.userName && userCredentials.email && userCredentials.password ? false:true}
+               onClick={()=>enterLoading(0)}
+               loading={loadings[0]}>
                 Register
               </Button>
             </Form.Item>
