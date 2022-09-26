@@ -83,7 +83,8 @@ export const Login = () => {
            disabled={userCredentials.user && userCredentials.password ? false:true}>
             Log in
           </Button>
-          Or <a href="/registration">register now!</a>
+          <br/>
+          <a href="/registration">durong due akun?</a>
         </Form.Item>
       </Form>
     </div>

@@ -23,7 +23,8 @@ return (
               onClick={()=>navigate("/home")} defaultSelectedKeys={['mail']}>
       Home
    </Menu.Item>
-   <Menu.Item key="about" icon={<TeamOutlined />} defaultSelectedKeys={['about']}>
+   <Menu.Item key="about" icon={<TeamOutlined />}
+              onClick={()=>navigate('/about')} defaultSelectedKeys={['about']}>
       Tentang Kami
    </Menu.Item>
  
@@ -40,7 +41,6 @@ return (
    </Menu.SubMenu>
 
  </Menu>
- 
 </Layout>
 
 );

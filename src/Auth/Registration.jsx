@@ -1,4 +1,5 @@
 import { Button, Checkbox, Form, Input } from "antd";
+import {UserOutlined,MailOutlined,LockOutlined} from '@ant-design/icons'
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {userRegistration} from "../service";
@@ -82,7 +83,9 @@ export const Registration = () => {
             },
           ]}
         >
-          <Input placeholder="Username"/>
+          <Input placeholder="Username"
+                 prefix={<UserOutlined className="site-form-item-icon" />} 
+                 />
         </Form.Item>
         <Form.Item
           name="email"
@@ -99,7 +102,8 @@ export const Registration = () => {
             },
           ]}
         >
-          <Input placeholder="please enter your email"/>
+          <Input placeholder="please enter your email"
+                 prefix={<MailOutlined className="site-form-item-icon" />}/>
         </Form.Item>
 
         <Form.Item
@@ -114,7 +118,8 @@ export const Registration = () => {
           ]}
           hasFeedback
         >
-          <Input.Password placeholder="please enter your password"/>
+          <Input.Password placeholder="please enter your password"
+                          prefix={<LockOutlined className="site-form-item-icon" />}/>
         </Form.Item>
 
         
@@ -132,8 +137,10 @@ export const Registration = () => {
               {...tailFormItemLayout}
             >
               <Checkbox>
-                I have read the <a href="-">agreement</a>
+                I have read the <a href="/registration">agreement</a>
               </Checkbox>
+              <br/>
+              <a href="/login">wes due akun?</a>
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
               <Button type="primary" htmlType="submit"
