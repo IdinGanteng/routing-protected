@@ -6,13 +6,38 @@ import { CustomerServiceOutlined,
     HomeOutlined,
     
   } from '@ant-design/icons';
-import { Layout,Menu} from "antd";
+import { Layout,Menu,Button,notification,Rate} from "antd";
 
 import React from "react";
 import { useNavigate } from "react-router";
 import { userLogout } from '../service';
 
- const Navbar = () => {
+const close = () => {
+  console.log(
+    'Notification was closed. Either the close button was clicked or duration time elapsed.',
+  );
+};
+
+const openNotification = () => {
+  const rate = () => <Rate />; 
+  const key = `open${Date.now()}`;
+  const btn = (
+    <Button type="primary" size="small" onClick={() => notification.close(key)}>
+      Confirm
+    </Button>
+  );
+  notification.open({
+    message: 'Notification Title',
+    description:
+      'A function will be be called after the notification is closed (automatically after the "duration" time of manually).',
+    btn,
+    key,
+    rate,
+    onClose: close,
+  });
+};
+
+const Navbar = () => {
 const navigate = useNavigate();
 const logout = () => userLogout(navigate)
 return (
@@ -32,7 +57,7 @@ return (
      <Menu.Item key="two" icon={<CustomerServiceOutlined/>}>
        Layanan Customor
      </Menu.Item>
-     <Menu.Item key="three" icon={<AppstoreOutlined />}>
+     <Menu.Item key="three" onClick={openNotification} icon={<AppstoreOutlined />}>
        Skuy
      </Menu.Item>
      <Menu.Item onClick={() => logout()} icon={<LogoutOutlined/>}>
