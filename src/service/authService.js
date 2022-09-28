@@ -1,3 +1,4 @@
+import { Rate,message } from "antd";
 import axios from "axios";
 const BASE_PATH = "https://nodejs-backend-api-playground.herokuapp.com"
 
@@ -34,5 +35,6 @@ export const userLogin = async (payload,navigate)=>{
 };
 export const userLogout = (navigate) => {
   localStorage.removeItem("userCredentials");
+  message.success(<Rate allowHalf defaultValue={2.5} />)
   navigate("/login")
 };
